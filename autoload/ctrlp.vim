@@ -6,7 +6,9 @@
 " Version:       1.80
 " =============================================================================
 
-" ** Static variables {{{1
+" ** Static variables
+" {{{1
+"
 " s:ignore() {{{2
 fu! s:ignore()
 	let igdirs = [
@@ -154,6 +156,7 @@ let [s:lcmap, s:prtmaps] = ['nn <buffer> <silent>', {
 	\ 'OpenMulti()':          ['<c-o>'],
 	\ 'YankLine()':           [],
 	\ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>'],
+  \ 'DiffOpen("\<c-o>")':   ['<c-q>'],
 	\ }]
 
 if !has('gui_running')
@@ -305,6 +308,7 @@ fu! s:match_window_opts()
 		\ : min([s:mw_max, &lines])
 endf
 "}}}1
+
 " * Open & Close {{{1
 fu! s:Open()
 	cal s:log(1)
@@ -1249,6 +1253,7 @@ fu! s:CreateNewFile(...)
 		\ ctrlp#normcmd('e')
 	cal s:openfile(cmd, filpath, tail, 1)
 endf
+"
 " * OpenMulti() {{{1
 fu! s:MarkToOpen()
 	let ct = s:curtype()
@@ -2685,6 +2690,12 @@ fu! s:autocmds()
 		aug END
 	en
 endf
-"}}}
 
+"}}}
+" - DiffOpen {{{1
+fu! s:DiffOpen(open_key)
+  call feedkeys(":diffthis" . a:open_key)
+endf
+"}}}
 " vim:fen:fdm=marker:fmr={{{,}}}:fdl=0:fdc=1:ts=2:sw=2:sts=2
+
