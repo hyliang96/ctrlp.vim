@@ -102,6 +102,7 @@ let [s:pref, s:bpref, s:opts, s:new_opts, s:lc_opts] =
 	\ 'bufpath_mod':           ['s:bufpath_mod', ':~:.:h'],
 	\ 'formatline_func':       ['s:flfunc', 's:formatline(v:val)'],
 	\ 'user_command_async':    ['s:usrcmdasync', 0],
+  \ 'exit_to_insert':        ['s:exit2insert',0],
 	\ }, {
 	\ 'open_multiple_files':   's:opmul',
 	\ 'regexp':                's:regexp',
@@ -956,9 +957,15 @@ fu! s:PrtExit()
 	if bufnr('%') == s:bufnr && bufname('%') == 'ControlP'
 		noa cal s:Close()
 		noa winc p
-	els
+    if s:exit2insert
+      noa start
+      if exists(':AirlineRefresh')
+        AirlineRefresh
+      endif
+    endif
+  els
 		exe bw.'winc w'
-	en
+  end
 endf
 
 fu! s:PrtHistory(...)
@@ -1008,7 +1015,7 @@ fu! s:MapSpecs()
 		en
 	en
 	for [ke, va] in items(s:prtmaps) | for kp in va
-		exe s:lcmap kp ':<c-u>cal <SID>'.ke.'<cr>'
+      exe s:lcmap kp ':<c-u>cal <SID>'.ke.'<cr>'
 	endfo | endfo
 	let s:smapped = s:bufnr
 endf

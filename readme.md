@@ -1,4 +1,5 @@
 # ctrlp.vim
+
 Full path fuzzy __file__, __buffer__, __mru__, __tag__, __...__ finder for Vim.
 
 * Written in pure Vimscript for MacVim, gVim and Vim 7.0+.
@@ -50,10 +51,10 @@ Use `:diffthis` when opening multiple files to run `:diffthis` on the first 4 fi
     let g:ctrlp_working_path_mode = 'ra'
     ```
 
-    `'c'` - the directory of the current file.  
-    `'a'` - the directory of the current file, unless it is a subdirectory of the cwd  
-    `'r'` - the nearest ancestor of the current file that contains one of these directories or files: `.git` `.hg` `.svn` `.bzr` `_darcs`  
-    `'w'` - modifier to "r": start search from the cwd instead of the current file's directory  
+    `'c'` - the directory of the current file.
+    `'a'` - the directory of the current file, unless it is a subdirectory of the cwd
+    `'r'` - the nearest ancestor of the current file that contains one of these directories or files: `.git` `.hg` `.svn` `.bzr` `_darcs`
+    `'w'` - modifier to "r": start search from the cwd instead of the current file's directory
     `0` or `''` (empty string) - disable this feature.
 
     If none of the default markers (`.git` `.hg` `.svn` `.bzr` `_darcs`) are present in a project, you can define additional ones with `g:ctrlp_root_markers`:
@@ -90,7 +91,7 @@ Use `:diffthis` when opening multiple files to run `:diffthis` on the first 4 fi
     ```
 
 * Ignore files in `.gitignore`
-    
+
     ```vim
       let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
     ```
